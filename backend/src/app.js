@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import ReviewRouter from "./routes/review.route.js";
 const app = express()
 
 app.use(cors())
@@ -15,4 +16,5 @@ app.use("/health" , (req,res)=>{
         message:"Success"
     })
 })
+app.use("/api", ReviewRouter)
 export default app
