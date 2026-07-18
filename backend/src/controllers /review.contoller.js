@@ -1,6 +1,8 @@
+import { reiewcode } from "../services/ai.services.js";
+
 export const CodeReview = async(req,res)=>{
 try {
-    const data = await req.body
+    const data = await reiewcode(req.body)
     console.log(data);
     res.status(201).json({
         data
