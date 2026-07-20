@@ -1,16 +1,24 @@
-import { RotateCcw, SearchX, Shield, Sparkles, Upload, Wand2, Zap   } from "lucide-react";
+import {
+  RotateCcw,
+  SearchX,
+  Shield,
+  Sparkles,
+  Upload,
+  Wand2,
+  Zap,
+} from "lucide-react";
 import React, { useState } from "react";
 import ReviewPanel from "../ui/ReviewPanel";
 
 const CodeEditor = ({
-code , setcode ,handelReview, review, loading ,language ,setlanguage
+  code,
+  setcode,
+  handelReview,
+  review,
+  loading,
+  language,
+  setlanguage,
 }) => {
-  
-  //   const inputCode = (event)=>{
-  //   setcode(event.target.value)
-    
-  // }
-  // console.log(code);
   return (
     <div className="grid grid-cols-12 gap-6 mt-10">
       {/* Editor */}
@@ -26,7 +34,10 @@ code , setcode ,handelReview, review, loading ,language ,setlanguage
             <span className="text-gray-500 tracking-widest">EDITOR.TS</span>
           </div>
 
-          <textarea onChange={(e)=>{setcode(e.target.value)}}
+          <textarea
+            onChange={(e) => {
+              setcode(e.target.value);
+            }}
             placeholder="Paste your code here..."
             className="w-full h-[500px] bg-[#181B23] resize-none outline-none p-8 text-gray-400"
           />
@@ -45,10 +56,14 @@ code , setcode ,handelReview, review, loading ,language ,setlanguage
             </button>
           </div>
 
-          <button onClick={()=>{handelReview(code , language) 
-          }} className="bg-emerald-500 text-black rounded-xl px-10 py-3 font-semibold flex gap-3 items-center hover:bg-emerald-400">
+          <button
+            onClick={() => {
+              handelReview(code, language);
+            }}
+            className="bg-emerald-500 text-black rounded-xl px-10 py-3 font-semibold flex gap-3 items-center hover:bg-emerald-400"
+          >
             <Sparkles size={20} />
-            {loading ? "Reviewing..." :"Review"}
+            {loading ? "Reviewing..." : "Review"}
           </button>
         </div>
 
@@ -86,28 +101,26 @@ code , setcode ,handelReview, review, loading ,language ,setlanguage
             </span>
           </div>
 
-          <ReviewPanel/>
+          <ReviewPanel review={review} />
         </div>
       </div>
     </div>
   );
-  
 };
 function Card({ icon, title, text }) {
-return (
-  <div className="bg-[#1B1D26] border border-[#343845] rounded-xl p-6 flex gap-4">
-    <div className="w-12 h-12 rounded-lg bg-[#252933] flex items-center justify-center">
-      {icon}
-    </div>
+  return (
+    <div className="bg-[#1B1D26] border border-[#343845] rounded-xl p-6 flex gap-4">
+      <div className="w-12 h-12 rounded-lg bg-[#252933] flex items-center justify-center">
+        {icon}
+      </div>
 
-    <div>
-      <h3 className="font-semibold text-lg">{title}</h3>
+      <div>
+        <h3 className="font-semibold text-lg">{title}</h3>
 
-      <p className="text-gray-400 text-sm mt-2 leading-6">{text}</p>
+        <p className="text-gray-400 text-sm mt-2 leading-6">{text}</p>
+      </div>
     </div>
-  </div>
-);
+  );
 }
-
 
 export default CodeEditor;

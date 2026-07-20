@@ -19,9 +19,12 @@ import useReview from "../hooks/useReview";
 import { useState } from "react";
 
 export default function Dashboard() {
+  
   const [code, setcode] = useState("");
   const [language, setlanguage] = useState("javascript")
   let { handelReview, review, loading } = useReview();
+  // console.log(review, 'review');
+  
 
   return (
     <div className="min-h-screen bg-[#0B0E14] text-white flex">
