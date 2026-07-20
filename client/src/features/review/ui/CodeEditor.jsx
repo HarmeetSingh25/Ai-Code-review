@@ -1,8 +1,16 @@
 import { RotateCcw, SearchX, Shield, Sparkles, Upload, Wand2, Zap   } from "lucide-react";
-import React from "react";
-import ReviewPanel from "./ReviewPanel";
+import React, { useState } from "react";
+import ReviewPanel from "../ui/ReviewPanel";
 
-const CodeEditor = () => {
+const CodeEditor = ({
+code , setcode ,handelReview, review, loading ,language ,setlanguage
+}) => {
+  
+  //   const inputCode = (event)=>{
+  //   setcode(event.target.value)
+    
+  // }
+  // console.log(code);
   return (
     <div className="grid grid-cols-12 gap-6 mt-10">
       {/* Editor */}
@@ -18,7 +26,7 @@ const CodeEditor = () => {
             <span className="text-gray-500 tracking-widest">EDITOR.TS</span>
           </div>
 
-          <textarea
+          <textarea onChange={(e)=>{setcode(e.target.value)}}
             placeholder="Paste your code here..."
             className="w-full h-[500px] bg-[#181B23] resize-none outline-none p-8 text-gray-400"
           />
@@ -37,9 +45,10 @@ const CodeEditor = () => {
             </button>
           </div>
 
-          <button className="bg-emerald-500 text-black rounded-xl px-10 py-3 font-semibold flex gap-3 items-center hover:bg-emerald-400">
+          <button onClick={()=>{handelReview(code , language) 
+          }} className="bg-emerald-500 text-black rounded-xl px-10 py-3 font-semibold flex gap-3 items-center hover:bg-emerald-400">
             <Sparkles size={20} />
-            Review Code
+            {loading ? "Reviewing..." :"Review"}
           </button>
         </div>
 

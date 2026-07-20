@@ -12,11 +12,17 @@ import {
   Globe,
   Sparkles,
 } from "lucide-react";
-import Navbar from "../components/Navbar";
-import Codeeditor from "../components/Codeeditor";
-import Sidebar from "../components/sidebar";
+import Navbar from "../../../components/Navbar";
+import Codeeditor from "../../../features/review/ui/CodeEditor";
+import Sidebar from "../../../components/sidebar";
+import useReview from "../hooks/useReview";
+import { useState } from "react";
 
 export default function Dashboard() {
+  const [code, setcode] = useState("");
+  const [language, setlanguage] = useState("javascript")
+  let { handelReview, review, loading } = useReview();
+
   return (
     <div className="min-h-screen bg-[#0B0E14] text-white flex">
       {/* Sidebar */}
@@ -36,7 +42,15 @@ export default function Dashboard() {
           </p>
 
           {/* Editor + Review */}
-          <Codeeditor />
+          <Codeeditor
+            code={code}
+            setcode={setcode}
+            handelReview={handelReview}
+            review={review}
+            loading={loading}
+            language={language}
+            setlanguage={setlanguage}
+          />
         </div>
       </main>
     </div>

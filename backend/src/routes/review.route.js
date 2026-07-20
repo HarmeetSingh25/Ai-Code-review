@@ -3,5 +3,5 @@ import { CodeReview } from "../controllers /review.contoller.js";
 
 const ReviewRouter= Router()
 
-ReviewRouter.post("/v1/review" , CodeReview)
+ReviewRouter.post("/review" , CodeReview)
 export default ReviewRouter
