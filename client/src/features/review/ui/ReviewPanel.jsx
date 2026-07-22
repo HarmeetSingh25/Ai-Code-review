@@ -12,6 +12,7 @@ const ReviewPanel = ({ review }) => {
             <Sparkles className="text-emerald-400" size={20} />
           </div>
 
+
           <div>
             <h3 className="font-semibold text-lg">AI Review</h3>
             <p className="text-sm text-gray-400">Generated successfully</p>
