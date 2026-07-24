@@ -2,21 +2,30 @@ import { useState } from "react";
 import { codeReview } from "../services/review.service";
 
 const useReview = () => {
-  const [review, setreview] = useState(null);
+  const [message, setmessage] = useState({
+    role: "assistant",
+    content: "Hi! Paste your code and ask anything ",
+  });
   const [loading, setloading] = useState(false);
 
-  const handelReview = async ( code, language) => {
+  const handelReview = async (code, prompt, language) => {
     try {
-        setloading(true);
+      setloading(true);
 
-      let resposne = await codeReview({
-        code,
-        language,
-      });
-      console.log(resposne.data , "resposne");
-      
-      
-      setreview(resposne.data);
+      let resposne = await codeReview({ language, code, prompt });
+      console.log(resposne.data, "resposne");
+return resposne.data
+      // setmessage((prev) => [
+      //   ...prev,
+      //   {
+      //     role: "user",
+      //     content: prompt,
+      //   },
+      //   {
+      //     role: "assitant",
+      //     content: resposne.data,
+      //   },
+      // ]);
     } catch (err) {
       console.log(err);
     } finally {
@@ -26,7 +35,7 @@ const useReview = () => {
 
   return {
     loading,
-    review,
+    message,
     handelReview,
   };
 };

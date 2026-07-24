@@ -17,14 +17,44 @@ import Codeeditor from "../../../features/review/ui/CodeEditor";
 import Sidebar from "../../../components/sidebar";
 import useReview from "../hooks/useReview";
 import { useState } from "react";
+import PromptInput from "../ui/PromptInput";
+import ChatWindow from "../ui/ChatWindow";
 
 export default function Dashboard() {
-  
+  const [prompt, setPrompt] = useState("");
   const [code, setcode] = useState("");
-  const [language, setlanguage] = useState("javascript")
+  const [language, setlanguage] = useState("javascript");
+  const [messages, setmessages] = useState([
+   { role: "assitant",
+    content: "👋 Hello! Paste your code into the editor and ask me anything.",}
+  ]);
   let { handelReview, review, loading } = useReview();
   // console.log(review, 'review');
-  
+
+  const handleSend = async (prompt) => {
+
+  setmessages((prev) => [
+    ...prev,
+    {
+      role: "user",
+      content: prompt,
+    },
+  ]);
+
+  const response = await handelReview(
+    language,
+    code,
+    prompt
+  );
+
+  setmessages((prev) => [
+    ...prev,
+    {
+      role: "assistant",
+      content: response,
+    },
+  ]);
+};
 
   return (
     <div className="min-h-screen bg-[#0B0E14] text-white flex">
@@ -45,14 +75,10 @@ export default function Dashboard() {
           </p>
 
           {/* Editor + Review */}
-          <Codeeditor
-            code={code}
-            setcode={setcode}
-            handelReview={handelReview}
-            review={review}
+          <ChatWindow
+            messages={messages}
             loading={loading}
-            language={language}
-            setlanguage={setlanguage}
+            onsend={handleSend}
           />
         </div>
       </main>
